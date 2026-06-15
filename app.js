@@ -4,6 +4,7 @@
 if (!process.env.__ALREADY_BOOTSTRAPPED_ENVS) require('dotenv').config();
 
 const fs = require('fs');
+const path = require('path');
 const { createServer } = require('@app-core/server');
 const { createConnection } = require('@app-core/mongoose');
 const { createQueue } = require('@app-core/queue');
@@ -39,7 +40,7 @@ function logEndpointMetaData(endpointConfigs) {
   endpointConfigs.forEach((endpointConfig) => {
     const { path: basePath, options } = endpointConfig;
 
-    const dirs = fs.readdirSync(basePath);
+    const dirs = fs.readdirSync(path.join(__dirname, basePath));
 
     dirs.forEach((file) => {
       const handler = require(`${basePath}${file}`);
@@ -73,7 +74,7 @@ if (canLogEndpointInformation) {
 }
 
 function setupEndpointHandlers(basePath, options = {}) {
-  const dirs = fs.readdirSync(basePath);
+  const dirs = fs.readdirSync(path.join(__dirname, basePath));
 
   dirs.forEach((file) => {
     const handler = require(`${basePath}${file}`);
