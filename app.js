@@ -90,4 +90,8 @@ ENDPOINT_CONFIGS.forEach((config) => {
   setupEndpointHandlers(config.path, config.options);
 });
 
-server.startServer();
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  server.startServer();
+}
+
+module.exports = server.executeRequest;
