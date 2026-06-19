@@ -1,0 +1,17 @@
+node_modules/
+npm-debug.log
+.git/
+.gitignore
+.env
+.env.example
+.eslintrc.json
+.prettierrc
+.husky/
+.github/
+README.md
+assessment.md
+documentation.md
+test_instructions.md
+test/
+specs/
+*.md
